@@ -37,12 +37,19 @@ button {
   background-color: var(--base3);
   color: var(--base03);
   border: none;
-  padding: 2px;
+  padding: 10px;
   font-size: 2rem;
+  border-radius: 4px;
 }
 
 input {
   font-size: 2rem;
+  padding: 10px;
+  margin-right: 10px;
+  border: none;
+  border-bottom: 1px solid var(--base3);
+  background-color: var(--base03);
+  color: var(--base3);
 }
 
 .clear-completed {

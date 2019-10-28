@@ -31,6 +31,7 @@ class TodoForm extends React.Component {
           id="task"
           value={this.state.task}
           onChange={this.handleChange}
+          placeholder="Add a task"
         />
         <button>Add</button>
       </form>
