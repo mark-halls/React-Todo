@@ -3,6 +3,8 @@ import React from "react";
 import TodoForm from "./components/TodoComponents/TodoForm";
 import TodoList from "./components/TodoComponents/TodoList";
 
+import "./App.css";
+
 const data = [
   {
     task: "Organize Garage",
@@ -63,7 +65,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="app">
         <h2>Welcome to your Todo App!</h2>
         <TodoList
           toggleCompleted={this.toggleCompleted}
@@ -71,7 +73,7 @@ class App extends React.Component {
           addTask={this.addTask}
         />
         <TodoForm addTask={this.addTask} />
-        <button onClick={() => this.clearCompleted()}>Clear Completed</button>
+        <button className="clear-completed" onClick={() => this.clearCompleted()}>Clear Completed</button>
       </div>
     );
   }
