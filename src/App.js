@@ -31,9 +31,10 @@ class App extends React.Component {
     this.setState({
       todo: this.state.todo.map(task => {
         if (task.id === id) {
+          console.log(task);
           return {
             ...task,
-            completed: !task.purchased
+            completed: !task.completed
           };
         } else {
           return task;

@@ -7,8 +7,8 @@ class Todo extends React.Component {
 
   render() {
     return (
-      <div>
-        <p>{this.props.task}</p>
+      <div onClick={() => this.props.toggleCompleted(this.props.task.id)}>
+        <p>{this.props.task.task}</p>
       </div>
     );
   }
