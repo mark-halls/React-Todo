@@ -6,16 +6,22 @@ import React from "react";
 import Todo from "./Todo";
 
 class TodoList extends React.Component {
+  constructor() {
+    super();
+  }
+
   render() {
-    <div className="todo-list">
-      {this.props.todo.map(task => (
-        <Todo
-          key={item.id}
-          task={task}
-          toggleCompleted={this.props.toggleCompleted}
-        />
-      ))}
-    </div>;
+    return (
+      <div className="todo-list">
+        {this.props.todo.map(task => (
+          <Todo
+            key={task.id}
+            task={task.task}
+            toggleCompleted={this.props.toggleCompleted}
+          />
+        ))}
+      </div>
+    );
   }
 }
 

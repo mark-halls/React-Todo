@@ -1,5 +1,8 @@
 import React from "react";
 
+import TodoForm from "./components/TodoComponents/TodoForm";
+import TodoList from "./components/TodoComponents/TodoList";
+
 const data = [
   {
     task: "Organize Garage",
@@ -24,10 +27,43 @@ class App extends React.Component {
     };
   }
 
+  toggleCompleted = id => {
+    this.setState({
+      todo: this.state.todo.map(task => {
+        if (task.id === id) {
+          return {
+            ...task,
+            completed: !task.purchased
+          };
+        } else {
+          return task;
+        }
+      })
+    });
+  };
+
+  addTask = name => {
+    const newTask = {
+      task: name,
+      id: Date.now(),
+      completed: false
+    };
+
+    this.setState({
+      todo: [...this.state.todo, newTask]
+    });
+  };
+
   render() {
     return (
       <div>
         <h2>Welcome to your Todo App!</h2>
+        <TodoList
+          toggleCompleted={this.toggleCompleted}
+          todo={this.state.todo}
+          addTask={this.addTask}
+        />
+        <TodoForm addTask={this.addTask} />
       </div>
     );
   }
