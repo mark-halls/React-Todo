@@ -18,6 +18,13 @@ const data = [
   }
 ];
 
+const dataFromStorage = localStorage.getItem("todo");
+
+const dataToStorage = arr => {
+  console.log(arr);
+  localStorage.setItem("todo", JSON.stringify(arr));
+};
+
 class App extends React.Component {
   // you will need a place to store your state in this component.
   // design `App` to be the parent component of your application.
@@ -25,30 +32,36 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      todo: data
+      todo: dataFromStorage ? JSON.parse(dataFromStorage) : []
     };
   }
 
   toggleCompleted = id => {
-    this.setState({
-      todo: this.state.todo.map(task => {
-        if (task.id === id) {
-          console.log(task);
-          return {
-            ...task,
-            completed: !task.completed
-          };
-        } else {
-          return task;
-        }
-      })
-    });
+    this.setState(
+      {
+        todo: this.state.todo.map(task => {
+          if (task.id === id) {
+            console.log(task);
+            return {
+              ...task,
+              completed: !task.completed
+            };
+          } else {
+            return task;
+          }
+        })
+      },
+      () => dataToStorage(this.state.todo)
+    );
   };
 
   clearCompleted = () => {
-    this.setState({
-      todo: this.state.todo.filter(task => !task.completed)
-    });
+    this.setState(
+      {
+        todo: this.state.todo.filter(task => !task.completed)
+      },
+      () => dataToStorage(this.state.todo)
+    );
   };
 
   addTask = name => {
@@ -58,9 +71,12 @@ class App extends React.Component {
       completed: false
     };
 
-    this.setState({
-      todo: [...this.state.todo, newTask]
-    });
+    this.setState(
+      {
+        todo: [...this.state.todo, newTask]
+      },
+      () => dataToStorage(this.state.todo)
+    );
   };
 
   render() {
@@ -73,7 +89,12 @@ class App extends React.Component {
           addTask={this.addTask}
         />
         <TodoForm addTask={this.addTask} />
-        <button className="clear-completed" onClick={() => this.clearCompleted()}>Clear Completed</button>
+        <button
+          className="clear-completed"
+          onClick={() => this.clearCompleted()}
+        >
+          Clear Completed
+        </button>
       </div>
     );
   }
