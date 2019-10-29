@@ -38,7 +38,7 @@ class App extends React.Component {
           }
         })
       },
-      () => dataToStorage(this.state.todo)
+      () => this.dataToStorage(this.state.todo)
     );
   };
 
@@ -47,7 +47,7 @@ class App extends React.Component {
       {
         todo: this.state.todo.filter(task => !task.completed)
       },
-      () => dataToStorage(this.state.todo)
+      () => this.dataToStorage(this.state.todo)
     );
   };
 
@@ -62,8 +62,13 @@ class App extends React.Component {
       {
         todo: [...this.state.todo, newTask]
       },
-      () => dataToStorage(this.state.todo)
+      () => this.dataToStorage(this.state.todo)
     );
+  };
+
+  dataToStorage = arr => {
+    console.log(arr);
+    localStorage.setItem("todo", JSON.stringify(arr));
   };
 
   render() {
