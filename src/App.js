@@ -5,8 +5,6 @@ import TodoList from "./components/TodoComponents/TodoList";
 
 import "./App.css";
 
-const dataFromStorage = localStorage.getItem("todo");
-
 const dataToStorage = arr => {
   console.log(arr);
   localStorage.setItem("todo", JSON.stringify(arr));
@@ -19,7 +17,9 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      todo: dataFromStorage ? JSON.parse(dataFromStorage) : []
+      todo: localStorage.getItem("todo")
+        ? JSON.parse(localStorage.getItem("todo"))
+        : []
     };
   }
 
